@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 218.0
+margin_top = 7.0
+margin_right = 339.0
+margin_bottom = 21.0
+rect_scale = Vector2( 12.8605, 31.6649 )
+text = "Destroy the castle!"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 583.0
+margin_top = 543.0
+margin_right = 625.0
+margin_bottom = 563.0
+rect_scale = Vector2( 18.2542, 18.1499 )
+text = "play!"
