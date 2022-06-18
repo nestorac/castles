@@ -15,6 +15,7 @@ export (int) var min_zoom = -10
 export (float) var zoom_speed = 50
 var zoom_direction = 0
 onready var camera = $Elevation/Camera
+onready var flag = $"../Flag"
 
 # Variables de la selecciṕón
 var selected_units = []
@@ -26,6 +27,10 @@ func _process(delta):
 	calc_move(delta, mouse_position)
 	mouse_rotate(delta)
 	zoom(delta)
+	if Input.is_action_pressed("left_click"):
+		place_flag(mouse_position)
+	if Input.is_action_pressed("right_click"):
+		remove_flag()
 
 func _unhandled_input(event):
 	# See if we are rotating the camera.
@@ -86,9 +91,19 @@ func calc_move(delta, m_pos):
 	
 	global_translate(move_vector * MOVE_SPEED * delta)
 
-#func ray_from_mouse (mouse_position, collision_mask):
-#	var ray_start = camera.project_ray_origin(mouse_position)
-#	var ray_end = ray_start + camera.project_ray_normal(mouse_position) * RAY_LENGHT
-#	var space_state = get_world().direct_space_state
-#
-#	return space_state.intersect_ray(ray_start, ray_end, [], collision_mask)
+func ray_from_mouse (mouse_position, collision_mask):
+	var ray_start = camera.project_ray_origin(mouse_position)
+	var ray_end = ray_start + camera.project_ray_normal(mouse_position) * RAY_LENGHT
+	var space_state = get_world().direct_space_state
+
+	return space_state.intersect_ray(ray_start, ray_end, [], collision_mask)
+
+func place_flag(mouse_position):
+	var result = ray_from_mouse(mouse_position, 1)
+	if result:
+		flag.translation = result.position
+		flag.emit_signal("flag_placed", result.position)
+
+func remove_flag():
+	flag.translation = Vector3(-50,50,50)
+	flag.emit_signal("flag_removed")
