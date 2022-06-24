@@ -102,7 +102,7 @@ func place_flag(mouse_position):
 	var result = ray_from_mouse(mouse_position, 1)
 	if result:
 		flag.translation = result.position
-		flag.emit_signal("flag_placed", result.position)
+		flag.emit_signal("flag_placed", flag)
 
 func remove_flag():
 	flag.translation = Vector3(-50,50,50)

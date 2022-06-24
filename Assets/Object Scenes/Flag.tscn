@@ -38,3 +38,29 @@ script = ExtResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 material/1 = null
+
+[node name="UnitsPositions" type="Spatial" parent="."]
+
+[node name="UnitPosition1" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+
+[node name="UnitPosition2" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+
+[node name="UnitPosition3" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+
+[node name="UnitPosition4" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+
+[node name="UnitPosition5" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.754601, 0, 0.666571 )
+
+[node name="UnitPosition6" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.745115, 0, 0.666571 )
+
+[node name="UnitPosition7" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.745115, 0, -0.660114 )
+
+[node name="UnitPosition8" type="Position3D" parent="UnitsPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.750608, 0, -0.660114 )
