@@ -28,7 +28,14 @@ func _process(delta):
 	mouse_rotate(delta)
 	zoom(delta)
 	if Input.is_action_pressed("left_click"):
-		place_flag(mouse_position)
+		var ray_result = ray_from_mouse(mouse_position, 9)
+		if ray_result.collider.is_in_group("Floor"):
+			var castles = get_tree().get_nodes_in_group("Castle")
+			for castle in castles:
+				castle.deselect_castle(castle)
+			place_flag(mouse_position)
+		elif ray_result.collider.is_in_group("Castle"):
+			ray_result.collider.select_castle()
 	if Input.is_action_pressed("right_click"):
 		remove_flag()
 
