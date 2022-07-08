@@ -71,6 +71,9 @@ right_click={
 
 3d_physics/layer_1="ground"
 3d_physics/layer_2="units"
+3d_physics/layer_3="enemy units"
+3d_physics/layer_4="castle"
+3d_physics/layer_5="visionbox"
 
 [physics]
 

@@ -151,3 +151,51 @@ custom_fonts/font = ExtResource( 7 )
 text = "Units: -1"
 autowrap = true
 clip_text = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpawnPoints" type="Spatial" parent="."]
+
+[node name="SpawnPoint0" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.03846 )
+
+[node name="SpawnPoint1" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01181, 0, 1.15797 )
+
+[node name="SpawnPoint2" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05052, 0, 1.50719 )
+
+[node name="SpawnPoint3" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24277, 0, 2.18338 )
+
+[node name="SpawnPoint4" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24874, 0, 2.10836 )
+
+[node name="SpawnPoint5" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18191, 0, 3.06494 )
+
+[node name="SpawnPoint6" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1399, 0, 2.96512 )
+
+[node name="EnemyPositions" type="Spatial" parent="."]
+
+[node name="EnemyPosition0" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.87377 )
+
+[node name="EnemyPosition1" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11044, 0, 1.97559 )
+
+[node name="EnemyPosition2" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02618, 0, 1.88873 )
+
+[node name="EnemyPosition3" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77687, 0, 0.441227 )
+
+[node name="EnemyPosition4" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8233, 0, 0.450742 )
+
+[node name="EnemyPosition5" type="Position3D" parent="EnemyPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.47758 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

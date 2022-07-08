@@ -7,6 +7,7 @@ var enemies = []
 # State machine
 enum{IDLE, MOVING, CHASING, ATTACKING}
 
+
 var state = IDLE
 
 # For pathfinding
