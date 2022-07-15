@@ -9,6 +9,7 @@ enum{IDLE, MOVING, CHASING, ATTACKING}
 
 
 var state = IDLE
+var hp = 5
 
 # For pathfinding
 var path = []
@@ -93,3 +94,8 @@ func _on_VisionBox_body_exited(body):
 		else:
 			state = CHASING
 			create_path(enemies.front().global_transform.origin)
+
+func get_damage(damage):
+	hp -= damage
+	if hp <= 0:
+		queue_free()

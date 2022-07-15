@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/EnemyUnit.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Animations/ AttackAnim.tres" type="Animation" id=2]
+[ext_resource path="res://Scripts/RayCastToPlayerUnit.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/HitBox.gd" type="Script" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 4, 2 )
@@ -16,6 +19,12 @@ rings = 12
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.572549, 0.882353, 0.890196, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 0.5, 0.5, 2 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.420668, 0.352576, 1.77399 )
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.3, 0.6, 0.3 )
@@ -33,24 +42,55 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.6, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 7 )
 
-[node name="MeshInstance" type="MeshInstance" parent="UnitMesh"]
+[node name="RightEye" type="MeshInstance" parent="UnitMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.456194, 1.2947, -1.05477 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="UnitMesh"]
+[node name="LeftEye" type="MeshInstance" parent="UnitMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427379, 1.2947, -1.05477 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
+
+[node name="Shoulder" type="Spatial" parent="UnitMesh"]
+transform = Transform( 1, 0, 0, 0, -0.0137876, 0.999905, 0, -0.999905, -0.0137876, 1.05623, 0.503622, 0 )
+
+[node name="Arm" type="MeshInstance" parent="UnitMesh/Shoulder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197031, -0.135255, -0.596886 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="HitBox" type="Area" parent="UnitMesh/Shoulder/Arm"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="UnitMesh/Shoulder/Arm/HitBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.60562 )
+shape = SubResource( 9 )
+disabled = true
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
 shape = SubResource( 5 )
 
 [node name="VisionBox" type="Area" parent="."]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="VisionBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72165, -2.96643 )
 shape = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/AttackAnim = ExtResource( 2 )
+
+[node name="RayCastToPlayerUnit" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543621, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 2
+script = ExtResource( 3 )
+
+[connection signal="body_entered" from="VisionBox" to="." method="_on_VisionBox_body_entered"]
+[connection signal="body_exited" from="VisionBox" to="." method="_on_VisionBox_body_exited"]

@@ -20,7 +20,6 @@ onready var flag = $"../Flag"
 # Variables de la selecciṕón
 var selected_units = []
 var start_selection_position = Vector2()
-onready var selection_box = $SelectionBox
 
 func _process(delta):
 	var mouse_position = get_viewport().get_mouse_position()

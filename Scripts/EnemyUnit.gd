@@ -7,6 +7,7 @@ var state = MOVE_TO_CASTLE
 
 var enemies = []
 onready var castle = get_tree().get_nodes_in_group("PlayerCastle")
+var hp = 5
 
 # For pathfinding
 var path = []
@@ -20,7 +21,7 @@ func _process(delta):
 		MOVE_TO_CASTLE:
 			movement(delta)
 		CHASING:
-			pass
+			movement(delta)
 		ATTACK:
 			pass
 
@@ -47,3 +48,26 @@ func create_path(target_pos):
 	path = navigation.get_simple_path(global_transform.origin, target_pos)
 	path_index = 0
 	return path
+
+func get_damage(damage):
+	hp -= damage
+	if hp <= 0:
+		queue_free()
+
+
+func _on_VisionBox_body_entered(body):
+	if body.is_in_group("PlayerUnit"):
+		enemies.append(body)
+		state = CHASING
+		create_path(enemies.front().global_transform.origin)
+		print(state)
+
+
+func _on_VisionBox_body_exited(body):
+	if body.is_in_group("PlayerUnit"):
+		enemies.erase(body)
+		if enemies.empty():
+			state = MOVE_TO_CASTLE
+		else:
+			state = CHASING
+			create_path(enemies.front().global_transform.origin)
