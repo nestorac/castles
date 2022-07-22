@@ -2,8 +2,10 @@ extends KinematicBody
 
 class_name Enemy
 
-enum {MOVE_TO_CASTLE, CHASING, ATTACK}
+enum {MOVE_TO_CASTLE, CHASING, ATTACK_CASTLE}
 var state = MOVE_TO_CASTLE
+
+onready var debug_label = $"Control/DebugLabel"
 
 var enemies = []
 onready var castle = get_tree().get_nodes_in_group("PlayerCastle")
@@ -20,10 +22,25 @@ func _process(delta):
 	match state:
 		MOVE_TO_CASTLE:
 			movement(delta)
+			debug_label.text = "state: MOVE TO CASTLE"
 		CHASING:
 			movement(delta)
-		ATTACK:
-			pass
+			debug_label.text = "state: CHASING"
+		ATTACK_CASTLE:
+			attack_castle(delta)
+			debug_label.text = "state: ATTACK CASTLE"
+
+
+func attack_castle(delta):
+	var collision_shape = $"VisionBox/CollisionShape"
+	collision_shape.disabled = true
+	if path_index < path.size():
+		var move_vector = path[path_index] - global_transform.origin
+		if move_vector.length() < 1:
+			path_index += 1
+		else:
+			look_at(castle[0].global_transform.origin, Vector3.UP)
+			move_and_slide(move_vector.normalized() * SPEED * delta, Vector3.UP)
 
 
 func movement(delta):
@@ -60,14 +77,21 @@ func _on_VisionBox_body_entered(body):
 		enemies.append(body)
 		state = CHASING
 		create_path(enemies.front().global_transform.origin)
-		print(state)
-
+	elif body.is_in_group("PlayerCastle"):
+		var random_number = randi() % castle[0].enemy_positions.get_child_count()
+		print(random_number)
+		create_path(castle[0].enemy_positions.get_child(random_number).global_transform.origin)
+		print ("Attack castle")
+		state = ATTACK_CASTLE
 
 func _on_VisionBox_body_exited(body):
 	if body.is_in_group("PlayerUnit"):
 		enemies.erase(body)
 		if enemies.empty():
-			state = MOVE_TO_CASTLE
+			if state == ATTACK_CASTLE:
+				return
+			else:
+				state = MOVE_TO_CASTLE
 		else:
 			state = CHASING
 			create_path(enemies.front().global_transform.origin)

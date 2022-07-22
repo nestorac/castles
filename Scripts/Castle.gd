@@ -38,3 +38,9 @@ func spawn_unit():
 func _on_Timer_timeout():
 	if (units_node.get_child_count() < units_limit):
 		spawn_unit()
+
+func get_damage(damage):
+	hp -= damage
+	if hp <= 0:
+		queue_free()
+	
