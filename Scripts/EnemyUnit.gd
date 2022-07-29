@@ -32,8 +32,6 @@ func _process(delta):
 
 
 func attack_castle(delta):
-	var collision_shape = $"VisionBox/CollisionShape"
-	collision_shape.disabled = true
 	if path_index < path.size():
 		var move_vector = path[path_index] - global_transform.origin
 		if move_vector.length() < 1:
@@ -73,6 +71,8 @@ func get_damage(damage):
 
 
 func _on_VisionBox_body_entered(body):
+	if state == ATTACK_CASTLE:
+		return
 	if body.is_in_group("PlayerUnit"):
 		enemies.append(body)
 		state = CHASING
@@ -85,6 +85,8 @@ func _on_VisionBox_body_entered(body):
 		state = ATTACK_CASTLE
 
 func _on_VisionBox_body_exited(body):
+	if state == ATTACK_CASTLE:
+		return
 	if body.is_in_group("PlayerUnit"):
 		enemies.erase(body)
 		if enemies.empty():

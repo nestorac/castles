@@ -8,6 +8,8 @@ onready var control = $"Control"
 onready var spawn_points = $"SpawnPoints"
 var hp = 20
 
+var is_destroyed = false
+
 export var units_limit = 10
 
 export(PackedScene) var unit_scene
@@ -41,6 +43,10 @@ func _on_Timer_timeout():
 
 func get_damage(damage):
 	hp -= damage
-	if hp <= 0:
-		queue_free()
-	
+	if hp <= 0 and not is_destroyed:
+		var anim = $"AnimationPlayer"
+		anim.play("CastleDestroy")
+		is_destroyed = true
+
+func pause_game_finished():
+	get_tree().paused = true
