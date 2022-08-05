@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Castles"
-run/main_scene="res://Level Scenes/Level.tscn"
+run/main_scene="res://Level Scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [display]

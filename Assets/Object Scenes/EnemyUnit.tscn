@@ -64,7 +64,6 @@ material/0 = null
 collision_layer = 0
 collision_mask = 10
 script = ExtResource( 4 )
-attack_damage = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="UnitMesh/Shoulder/Arm/HitBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.60562 )

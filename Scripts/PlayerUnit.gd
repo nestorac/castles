@@ -5,11 +5,11 @@ class_name PlayerUnit
 var enemies = []
 
 # State machine
-enum{IDLE, MOVING, CHASING, ATTACKING}
+enum{IDLE, MOVING, CHASING, ATTACK_CASTLE}
 
 
 var state = IDLE
-var hp = 5
+var hp = 10
 
 # For pathfinding
 var path = []
@@ -17,6 +17,7 @@ var path_index = 0
 const SPEED = 500
 onready var navigation = get_parent().get_parent()
 onready var flag = $"../../../Flag"
+onready var castle = get_tree().get_nodes_in_group("EnemyCastle")
 
 
 func _ready():
@@ -32,8 +33,17 @@ func _physics_process(delta):
 			movement(delta)
 		CHASING:
 			movement(delta)
-		ATTACKING:
-			pass
+		ATTACK_CASTLE:
+			attack_castle(delta)
+			
+func attack_castle(delta):
+	if path_index < path.size():
+		var move_vector = path[path_index] - global_transform.origin
+		if move_vector.length() < 1:
+			path_index += 1
+		else:
+			look_at(castle[0].global_transform.origin, Vector3.UP)
+			move_and_slide(move_vector.normalized() * SPEED * delta, Vector3.UP)
 
 
 func movement(delta):
@@ -82,6 +92,9 @@ func _on_VisionBox_body_entered(body):
 		enemies.append(body)
 		state = CHASING
 		create_path(enemies.front().global_transform.origin)
+	elif body.is_in_group("EnemyCastle"):
+		create_path(castle[0].global_transform.origin)
+		state = ATTACK_CASTLE
 
 
 func _on_VisionBox_body_exited(body):

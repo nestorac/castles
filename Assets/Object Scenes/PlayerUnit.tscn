@@ -80,7 +80,7 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="Shoulder" type="Spatial" parent="UnitMesh"]
-transform = Transform( 1, 0, 0, 0, -0.0137876, 0.999904, 0, -0.999904, -0.0137876, 1.12827, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -0.0137878, 0.999904, 0, -0.999904, -0.0137878, 1.12827, 0, 0 )
 
 [node name="Arm" type="MeshInstance" parent="UnitMesh/Shoulder"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155497, 0, -1.19674 )
@@ -89,8 +89,9 @@ material/0 = null
 
 [node name="HitBox" type="Area" parent="UnitMesh/Shoulder/Arm"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 script = ExtResource( 3 )
+attack_damage = 10
 
 [node name="CollisionShape" type="CollisionShape" parent="UnitMesh/Shoulder/Arm/HitBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000655055, -0.426726 )
