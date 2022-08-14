@@ -65,32 +65,26 @@ visible = false
 [node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.5, 3, 5.59808 )
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -6.52628, 3, -0.767949 )
 mesh = SubResource( 6 )
-material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.473721, 3, -20.5 )
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="MeshInstance6" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.473719, 3, 22.5 )
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -21.5263, 3, 1.5 )
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="MeshInstance5" type="MeshInstance" parent="Navigation/NavigationMeshInstance/Map/InvisibleWalls"]
 transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 18.4737, 3, 1.5 )
 mesh = SubResource( 7 )
-material/0 = null
 
 [node name="Mountains" type="Spatial" parent="Navigation"]
 __meta__ = {
